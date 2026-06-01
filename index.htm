@@ -4,75 +4,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rajmani Shop</title>
+<title>Rajmani Online Shop</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:#f5f5f5;
+background:#f4f6f9;
 }
 
-/* HEADER */
 header{
 background:#0d1b3e;
 color:white;
 text-align:center;
-padding:20px;
+padding:15px;
 }
 
-h1{
-color:#d4af37;
-margin:0;
-}
+h1{color:#d4af37;margin:0}
 
-/* BUTTONS */
-.buttons{
+/* NAV */
+nav{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:10px;
-padding:15px;
+padding:10px;
+background:white;
 }
 
-.btn{
-padding:10px 15px;
-border-radius:50px;
-text-decoration:none;
+nav button{
+padding:10px;
+border:none;
+border-radius:20px;
+background:#0d1b3e;
 color:white;
-font-weight:bold;
+cursor:pointer;
 }
 
-.call{background:#007bff}
-.whatsapp{background:#25D366}
-.meesho{background:#f43397}
-.group{background:#128C7E}
+/* SECTIONS */
+section{display:none;padding:15px}
+.active{display:block}
 
-/* GALLERY */
-.gallery{
+/* PRODUCTS */
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:10px;
-padding:15px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
 }
 
-.gallery img{
+.card{
+background:white;
+border-radius:15px;
+padding:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
 width:100%;
-height:160px;
+height:150px;
 object-fit:cover;
 border-radius:10px;
 }
 
-/* REVIEW */
-.review-box{
-background:white;
-margin:15px;
-padding:15px;
-border-radius:15px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
+.price{color:green;font-weight:bold}
+
+button.action{
+width:100%;
+padding:10px;
+border:none;
+background:#0d1b3e;
+color:white;
+border-radius:10px;
+cursor:pointer;
+margin-top:5px;
 }
 
+/* INPUT */
 input,textarea{
 width:100%;
 padding:10px;
@@ -81,23 +89,12 @@ border-radius:10px;
 border:1px solid #ccc;
 }
 
-button{
-background:#0d1b3e;
-color:white;
-padding:10px;
-border:none;
-border-radius:50px;
-cursor:pointer;
-width:100%;
-}
-
-/* REVIEWS */
+/* REVIEW */
 .review{
 background:white;
-margin:10px 15px;
 padding:10px;
+margin:10px 0;
 border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* FOOTER */
@@ -106,7 +103,6 @@ text-align:center;
 padding:15px;
 background:#071126;
 color:white;
-margin-top:20px;
 }
 
 </style>
@@ -115,103 +111,182 @@ margin-top:20px;
 <body>
 
 <header>
-<h1>RAJMANI SUITING SHIRTING 🛍️</h1>
-<p>Premium Fabrics & Trusted Shop</p>
+<h1>RAJMANI SHOP 🛍️</h1>
 </header>
 
-<!-- BUTTONS -->
-<div class="buttons">
+<!-- NAV -->
+<nav>
+<button onclick="show('shop')">Shop</button>
+<button onclick="show('cart')">Cart</button>
+<button onclick="show('admin')">Admin</button>
+<button onclick="show('review')">Review</button>
+</nav>
 
-<a class="btn call" href="tel:+919687286173">📞 Call Now</a>
+<!-- SHOP -->
+<section id="shop" class="active">
+<h2>Products</h2>
+<div class="grid" id="products"></div>
+</section>
 
-<a class="btn whatsapp" href="https://wa.me/919687286173" target="_blank">💬 WhatsApp</a>
+<!-- CART -->
+<section id="cart">
+<h2>Cart 🛒</h2>
+<div id="cartList"></div>
+<h3 id="total"></h3>
 
-<a class="btn meesho" href="https://www.meesho.com/" target="_blank">🛒 Meesho</a>
+<button class="action" onclick="checkout()">
+Checkout (WhatsApp)
+</button>
+</section>
 
-<a class="btn group" href="https://chat.whatsapp.com/" target="_blank">👥 Group</a>
+<!-- ADMIN -->
+<section id="admin">
+<h2>Admin Panel 🔐</h2>
 
-</div>
+<input id="name" placeholder="Product Name">
+<input id="price" type="number" placeholder="Price">
+<input id="img" placeholder="Image URL (shop1.jpeg)">
 
-<!-- GALLERY -->
-<h2 style="text-align:center;">Our Shop Gallery</h2>
-
-<div class="gallery">
-
-<img src="shop1.jpeg">
-<img src="shop2.jpeg">
-<img src="shop3.jpeg">
-<img src="shop4.jpeg">
-<img src="shop5.jpeg">
-<img src="shop6.jpeg">
-
-</div>
+<button class="action" onclick="addProduct()">Add Product</button>
+</section>
 
 <!-- REVIEW -->
-<div class="review-box">
+<section id="review">
+<h2>Customer Reviews ⭐</h2>
 
-<h2>Leave a Review ⭐</h2>
+<input id="rname" placeholder="Your Name">
+<textarea id="rmsg" placeholder="Your Review"></textarea>
 
-<input type="text" id="name" placeholder="Your Name">
-<textarea id="msg" placeholder="Your Review"></textarea>
-
-<button onclick="addReview()">Submit Review</button>
-
-</div>
-
-<h2 style="text-align:center;">Customer Reviews</h2>
+<button class="action" onclick="addReview()">Submit Review</button>
 
 <div id="reviews"></div>
+</section>
 
 <footer>
-© 2026 Rajmani Shop | All Rights Reserved
+© 2026 Rajmani Shop
 </footer>
 
 <script>
 
-/* REVIEWS DATA */
+/* DATA */
+let products = JSON.parse(localStorage.getItem("products")) || [
+{name:"Premium Suiting",price:500,img:"shop1.jpeg"},
+{name:"Designer Shirting",price:700,img:"shop2.jpeg"}
+];
+
+let cart=[];
 let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-/* SHOW REVIEWS */
-function showReviews(){
+/* NAV */
+function show(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+render();
+}
 
-let html="";
+/* RENDER */
+function render(){
 
+/* PRODUCTS */
+let phtml="";
+products.forEach((p,i)=>{
+phtml+=`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p class="price">₹${p.price}</p>
+<button class="action" onclick="add(${i})">Add to Cart</button>
+</div>
+`;
+});
+document.getElementById("products").innerHTML=phtml;
+
+/* CART */
+let chtml="";
+let total=0;
+
+cart.forEach((c,i)=>{
+total+=c.price;
+chtml+=`<p>${c.name} - ₹${c.price}</p>`;
+});
+
+document.getElementById("cartList").innerHTML=chtml;
+document.getElementById("total").innerText="Total: ₹"+total;
+
+/* REVIEWS */
+let rhtml="";
 reviews.forEach(r=>{
-html+=`
+rhtml+=`
 <div class="review">
 <b>${r.name}</b>
 <p>${r.msg}</p>
 </div>
 `;
 });
-
-document.getElementById("reviews").innerHTML=html;
+document.getElementById("reviews").innerHTML=rhtml;
 
 }
 
-/* ADD REVIEW */
+/* ADD PRODUCT */
+function addProduct(){
+
+let n=document.getElementById("name").value;
+let p=document.getElementById("price").value;
+let i=document.getElementById("img").value;
+
+if(!n||!p||!i){alert("Fill all");return;}
+
+products.push({name:n,price:parseInt(p),img:i});
+localStorage.setItem("products",JSON.stringify(products));
+
+alert("Product Added ✅");
+render();
+}
+
+/* ADD CART */
+function add(i){
+cart.push(products[i]);
+render();
+}
+
+/* CHECKOUT */
+function checkout(){
+
+let msg="Order:%0A";
+let total=0;
+
+cart.forEach(c=>{
+msg+=`- ${c.name} ₹${c.price}%0A`;
+total+=c.price;
+});
+
+msg+=`Total: ₹${total}`;
+
+window.open("https://wa.me/919687286173?text="+encodeURIComponent(msg));
+
+cart=[];
+render();
+}
+
+/* REVIEW */
 function addReview(){
 
-let name=document.getElementById("name").value;
-let msg=document.getElementById("msg").value;
+let n=document.getElementById("rname").value;
+let m=document.getElementById("rmsg").value;
 
-if(name==""||msg==""){
-alert("Please fill all fields");
-return;
-}
+if(!n||!m){alert("Fill all");return;}
 
-reviews.push({name,msg});
-
+reviews.push({name:n,msg:m});
 localStorage.setItem("reviews",JSON.stringify(reviews));
 
-document.getElementById("name").value="";
-document.getElementById("msg").value="";
+document.getElementById("rname").value="";
+document.getElementById("rmsg").value="";
 
-showReviews();
+render();
 }
 
 /* INIT */
-showReviews();
+render();
 
 </script>
 
