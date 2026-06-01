@@ -14,62 +14,99 @@ font-family:Arial;
 background:#f5f5f5;
 }
 
+/* HEADER */
 header{
 background:#0d1b3e;
 color:white;
 text-align:center;
-padding:15px;
+padding:20px;
 }
 
 h1{
 color:#d4af37;
 margin:0;
-font-size:24px;
 }
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
+/* BUTTONS */
+.buttons{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
 padding:15px;
 }
 
-.card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-cursor:pointer;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
-
-.card h3{
-margin:10px;
-font-size:16px;
-}
-
-.card p{
-margin:0 10px 10px;
-color:green;
+.btn{
+padding:10px 15px;
+border-radius:50px;
+text-decoration:none;
+color:white;
 font-weight:bold;
 }
 
+.call{background:#007bff}
+.whatsapp{background:#25D366}
+.meesho{background:#f43397}
+.group{background:#128C7E}
+
+/* GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:10px;
+padding:15px;
+}
+
+.gallery img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:10px;
+}
+
+/* REVIEW */
+.review-box{
+background:white;
+margin:15px;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+background:#0d1b3e;
+color:white;
+padding:10px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+width:100%;
+}
+
+/* REVIEWS */
+.review{
+background:white;
+margin:10px 15px;
+padding:10px;
+border-radius:10px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* FOOTER */
 footer{
 text-align:center;
 padding:15px;
 background:#071126;
 color:white;
-margin-top:10px;
+margin-top:20px;
 }
 
 </style>
@@ -78,37 +115,52 @@ margin-top:10px;
 <body>
 
 <header>
-<h1>RAJMANI SHOP 🛍️</h1>
-<p>Tap product to order on WhatsApp</p>
+<h1>RAJMANI SUITING SHIRTING 🛍️</h1>
+<p>Premium Fabrics & Trusted Shop</p>
 </header>
 
-<div class="products">
+<!-- BUTTONS -->
+<div class="buttons">
 
-<div class="card" onclick="order('Premium Suiting',500)">
+<a class="btn call" href="tel:+919687286173">📞 Call Now</a>
+
+<a class="btn whatsapp" href="https://wa.me/919687286173" target="_blank">💬 WhatsApp</a>
+
+<a class="btn meesho" href="https://www.meesho.com/" target="_blank">🛒 Meesho</a>
+
+<a class="btn group" href="https://chat.whatsapp.com/" target="_blank">👥 Group</a>
+
+</div>
+
+<!-- GALLERY -->
+<h2 style="text-align:center;">Our Shop Gallery</h2>
+
+<div class="gallery">
+
 <img src="shop1.jpeg">
-<h3>Premium Suiting</h3>
-<p>₹500</p>
-</div>
-
-<div class="card" onclick="order('Designer Shirting',700)">
 <img src="shop2.jpeg">
-<h3>Designer Shirting</h3>
-<p>₹700</p>
-</div>
-
-<div class="card" onclick="order('Wedding Fabric',1200)">
 <img src="shop3.jpeg">
-<h3>Wedding Fabric</h3>
-<p>₹1200</p>
-</div>
-
-<div class="card" onclick="order('Cotton Fabric',400)">
 <img src="shop4.jpeg">
-<h3>Cotton Fabric</h3>
-<p>₹400</p>
-</div>
+<img src="shop5.jpeg">
+<img src="shop6.jpeg">
 
 </div>
+
+<!-- REVIEW -->
+<div class="review-box">
+
+<h2>Leave a Review ⭐</h2>
+
+<input type="text" id="name" placeholder="Your Name">
+<textarea id="msg" placeholder="Your Review"></textarea>
+
+<button onclick="addReview()">Submit Review</button>
+
+</div>
+
+<h2 style="text-align:center;">Customer Reviews</h2>
+
+<div id="reviews"></div>
 
 <footer>
 © 2026 Rajmani Shop | All Rights Reserved
@@ -116,20 +168,50 @@ margin-top:10px;
 
 <script>
 
-/* WhatsApp order function */
-function order(name,price){
+/* REVIEWS DATA */
+let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-let message =
-"Hello Rajmani Shop,%0A" +
-"I want to order:%0A" +
-"- " + name + " (₹" + price + ")";
+/* SHOW REVIEWS */
+function showReviews(){
 
-window.open(
-"https://wa.me/919687286173?text=" + message,
-"_blank"
-);
+let html="";
+
+reviews.forEach(r=>{
+html+=`
+<div class="review">
+<b>${r.name}</b>
+<p>${r.msg}</p>
+</div>
+`;
+});
+
+document.getElementById("reviews").innerHTML=html;
 
 }
+
+/* ADD REVIEW */
+function addReview(){
+
+let name=document.getElementById("name").value;
+let msg=document.getElementById("msg").value;
+
+if(name==""||msg==""){
+alert("Please fill all fields");
+return;
+}
+
+reviews.push({name,msg});
+
+localStorage.setItem("reviews",JSON.stringify(reviews));
+
+document.getElementById("name").value="";
+document.getElementById("msg").value="";
+
+showReviews();
+}
+
+/* INIT */
+showReviews();
 
 </script>
 
