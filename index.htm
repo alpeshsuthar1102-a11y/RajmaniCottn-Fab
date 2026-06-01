@@ -4,114 +4,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rajmani Complete Shop</title>
+<title>Rajmani Shop</title>
 
 <style>
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+}
 
-body{background:#f5f5f5}
-
-/* HEADER */
 header{
 background:#0d1b3e;
 color:white;
+text-align:center;
 padding:15px;
-text-align:center;
 }
 
-h1{color:#d4af37}
-
-/* LOGIN */
-.login{
-max-width:350px;
-margin:80px auto;
-background:white;
-padding:20px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
+h1{
+color:#d4af37;
+margin:0;
+font-size:24px;
 }
 
-input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-button{
-padding:10px;
-border:none;
-border-radius:50px;
-cursor:pointer;
-width:100%;
-}
-
-/* MAIN */
-#main{display:none}
-
-/* PRODUCTS */
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+padding:15px;
 }
 
 .card{
 background:white;
-padding:15px;
 border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
+overflow:hidden;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
 }
 
 .card img{
 width:100%;
-height:180px;
+height:150px;
 object-fit:cover;
-border-radius:10px;
 }
 
-.add{
-background:#0d1b3e;
-color:white;
-margin-top:5px;
+.card h3{
+margin:10px;
+font-size:16px;
 }
 
-/* CART */
-.cart{
-position:fixed;
-right:0;
-top:0;
-width:320px;
-height:100%;
-background:white;
-box-shadow:-5px 0 15px rgba(0,0,0,.2);
-padding:15px;
-overflow:auto;
+.card p{
+margin:0 10px 10px;
+color:green;
+font-weight:bold;
 }
 
-.pay{
-background:#25D366;
-color:white;
-margin-top:10px;
-}
-
-/* PAYMENT */
-.payment{
-display:none;
-text-align:center;
-padding:20px;
-}
-
-/* FOOTER */
 footer{
 text-align:center;
-padding:20px;
+padding:15px;
 background:#071126;
 color:white;
+margin-top:10px;
 }
 
 </style>
@@ -120,55 +78,34 @@ color:white;
 <body>
 
 <header>
-<h1>RAJMANI COMPLETE SHOP 🛍️</h1>
+<h1>RAJMANI SHOP 🛍️</h1>
+<p>Tap product to order on WhatsApp</p>
 </header>
 
-<!-- LOGIN -->
-<div class="login" id="loginBox">
+<div class="products">
 
-<h2>Admin Login</h2>
-
-<input type="password" id="pass" placeholder="Enter Password">
-
-<button onclick="login()" style="background:#0d1b3e;color:white;">
-Login
-</button>
-
+<div class="card" onclick="order('Premium Suiting',500)">
+<img src="shop1.jpeg">
+<h3>Premium Suiting</h3>
+<p>₹500</p>
 </div>
 
-<!-- MAIN -->
-<div id="main">
-
-<!-- PRODUCTS -->
-<div class="products" id="products"></div>
-
-<!-- CART -->
-<div class="cart">
-
-<h2>Cart 🛒</h2>
-<div id="cartItems"></div>
-
-<h3 id="total"></h3>
-
-<button class="pay" onclick="openPayment()">
-Proceed to Payment
-</button>
-
+<div class="card" onclick="order('Designer Shirting',700)">
+<img src="shop2.jpeg">
+<h3>Designer Shirting</h3>
+<p>₹700</p>
 </div>
 
-<!-- PAYMENT -->
-<div class="payment" id="payment">
+<div class="card" onclick="order('Wedding Fabric',1200)">
+<img src="shop3.jpeg">
+<h3>Wedding Fabric</h3>
+<p>₹1200</p>
+</div>
 
-<h2>Payment Page 💳</h2>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=9687286173@upi&pn=RajmaniShop">
-
-<p><b>UPI ID:</b> 9687286173@upi</p>
-
-<button onclick="confirmPayment()" style="background:#25D366;color:white;margin-top:10px;">
-I Have Paid
-</button>
-
+<div class="card" onclick="order('Cotton Fabric',400)">
+<img src="shop4.jpeg">
+<h3>Cotton Fabric</h3>
+<p>₹400</p>
 </div>
 
 </div>
@@ -179,99 +116,20 @@ I Have Paid
 
 <script>
 
-/* ADMIN LOGIN */
-function login(){
+/* WhatsApp order function */
+function order(name,price){
 
-let pass=document.getElementById("pass").value;
+let message =
+"Hello Rajmani Shop,%0A" +
+"I want to order:%0A" +
+"- " + name + " (₹" + price + ")";
 
-if(pass==="1234"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("main").style.display="block";
-load();
-updateCart();
-}
-else{
-alert("Wrong Password ❌");
-}
+window.open(
+"https://wa.me/919687286173?text=" + message,
+"_blank"
+);
 
 }
-
-/* PRODUCTS */
-let products=[
-{name:"Premium Suiting",price:500,img:"shop1.jpeg"},
-{name:"Designer Shirting",price:700,img:"shop2.jpeg"},
-{name:"Wedding Fabric",price:1200,img:"shop3.jpeg"}
-];
-
-let cart=[];
-
-/* LOAD PRODUCTS */
-function load(){
-
-let html="";
-
-products.forEach((p,i)=>{
-
-html+=`
-<div class="card">
-
-<img src="${p.img}">
-<h3>${p.name}</h3>
-<p>₹ ${p.price}</p>
-
-<button class="add" onclick="add(${i})">
-Add to Cart
-</button>
-
-</div>
-`;
-});
-
-document.getElementById("products").innerHTML=html;
-
-}
-
-/* ADD CART */
-function add(i){
-cart.push(products[i]);
-updateCart();
-}
-
-/* CART */
-function updateCart(){
-
-let html="";
-let total=0;
-
-cart.forEach(c=>{
-total+=c.price;
-html+=`<p>${c.name} - ₹${c.price}</p>`;
-});
-
-document.getElementById("cartItems").innerHTML=html;
-document.getElementById("total").innerText="Total: ₹"+total;
-}
-
-/* PAYMENT */
-function openPayment(){
-document.getElementById("payment").style.display="block";
-}
-
-function confirmPayment(){
-
-let msg="Order Paid:%0A";
-
-cart.forEach(c=>{
-msg+=`- ${c.name} ₹${c.price}%0A`;
-});
-
-window.open("https://wa.me/919687286173?text="+encodeURIComponent(msg));
-
-alert("Payment Successful 🎉");
-}
-
-/* INIT */
-load();
 
 </script>
 
