@@ -110,15 +110,6 @@ color:#0d1b3e;
 margin-bottom:40px;
 }
 
-/* ABOUT */
-.about{
-max-width:900px;
-margin:auto;
-text-align:center;
-line-height:1.8;
-font-size:18px;
-}
-
 /* FEATURES */
 .features{
 display:grid;
@@ -166,7 +157,7 @@ border-radius:50px;
 text-decoration:none;
 }
 
-/* WHATSAPP FLOAT */
+/* FLOAT WHATSAPP */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -178,7 +169,7 @@ border-radius:50px;
 text-decoration:none;
 }
 
-/* REVIEW SYSTEM */
+/* REVIEW */
 .review-box{
 max-width:600px;
 margin:auto;
@@ -192,11 +183,6 @@ padding:12px;
 margin:8px 0;
 border-radius:10px;
 border:1px solid #ccc;
-}
-
-.stars span{
-font-size:25px;
-cursor:pointer;
 }
 
 .review-list{
@@ -224,6 +210,27 @@ border:none;
 padding:5px 10px;
 border-radius:5px;
 cursor:pointer;
+}
+
+/* POPUP */
+#popup{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup-box{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+width:90%;
+max-width:320px;
 }
 
 /* FOOTER */
@@ -267,14 +274,6 @@ padding:20px;
 </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-<h2 class="section-title">About Us</h2>
-<div class="about">
-Best suiting & shirting shop in Deesa with premium quality fabrics.
-</div>
-</section>
-
 <!-- COLLECTION -->
 <section id="collection">
 <h2 class="section-title">Our Collection</h2>
@@ -311,14 +310,6 @@ Best suiting & shirting shop in Deesa with premium quality fabrics.
 
 <input type="text" id="name" placeholder="Your Name">
 
-<div class="stars">
-<span onclick="setRating(1)">⭐</span>
-<span onclick="setRating(2)">⭐</span>
-<span onclick="setRating(3)">⭐</span>
-<span onclick="setRating(4)">⭐</span>
-<span onclick="setRating(5)">⭐</span>
-</div>
-
 <textarea id="message" placeholder="Write review..."></textarea>
 
 <button onclick="addReview()"
@@ -347,7 +338,30 @@ Submit Review
 
 </section>
 
+<!-- FLOAT WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/919687286173">WhatsApp</a>
+
+<!-- POPUP -->
+<div id="popup">
+<div class="popup-box">
+
+<h2>Join WhatsApp Group</h2>
+<p>Latest Offers & Fabrics Updates</p>
+
+<a href="https://wa.me/919687286173?text=I%20want%20to%20join%20your%20WhatsApp%20group"
+style="display:inline-block;background:#25D366;color:white;padding:12px 20px;border-radius:50px;margin-top:10px;text-decoration:none;">
+👥 Join Now
+</a>
+
+<br><br>
+
+<button onclick="closePopup()"
+style="background:red;color:white;border:none;padding:10px 15px;border-radius:50px;">
+Close
+</button>
+
+</div>
+</div>
 
 <footer>
 © 2026 Rajmani Suiting Shirting
@@ -355,28 +369,32 @@ Submit Review
 
 <script>
 
-let selectedRating = 5;
+window.onload = function(){
+setTimeout(()=>{
+document.getElementById("popup").style.display="flex";
+loadReviews();
+},2000);
+};
 
-function setRating(r){
-selectedRating = r;
+function closePopup(){
+document.getElementById("popup").style.display="none";
 }
 
 function addReview(){
 
-let name = document.getElementById("name").value;
-let message = document.getElementById("message").value;
+let name=document.getElementById("name").value;
+let message=document.getElementById("message").value;
 
-if(name=="" || message==""){
+if(name==""||message==""){
 alert("Fill all fields");
 return;
 }
 
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
 
 reviews.push({
 id:Date.now(),
 name:name,
-rating:selectedRating,
 message:message
 });
 
@@ -390,9 +408,9 @@ loadReviews();
 
 function deleteReview(id){
 
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
 
-reviews = reviews.filter(r=>r.id!==id);
+reviews=reviews.filter(r=>r.id!==id);
 
 localStorage.setItem("reviews",JSON.stringify(reviews));
 
@@ -401,7 +419,7 @@ loadReviews();
 
 function loadReviews(){
 
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
 
 let html="";
 
@@ -411,7 +429,6 @@ html+=`
 <div class="review-card">
 <button class="delete-btn" onclick="deleteReview(${r.id})">X</button>
 <h3>${r.name}</h3>
-<p style="color:#f5a623">${"⭐".repeat(r.rating)}</p>
 <p>${r.message}</p>
 </div>
 `;
@@ -420,8 +437,6 @@ html+=`
 
 document.getElementById("reviewList").innerHTML=html;
 }
-
-window.onload=loadReviews;
 
 </script>
 
