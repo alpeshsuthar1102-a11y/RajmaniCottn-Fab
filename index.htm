@@ -4,11 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rajmani Shop - Complete E-Commerce</title>
+<title>Rajmani Complete Shop</title>
 
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
 body{background:#f5f5f5}
 
 /* HEADER */
@@ -20,6 +21,36 @@ text-align:center;
 }
 
 h1{color:#d4af37}
+
+/* LOGIN */
+.login{
+max-width:350px;
+margin:80px auto;
+background:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+width:100%;
+}
+
+/* MAIN */
+#main{display:none}
 
 /* PRODUCTS */
 .products{
@@ -43,15 +74,11 @@ object-fit:cover;
 border-radius:10px;
 }
 
-button{
-padding:10px;
-border:none;
-border-radius:50px;
-cursor:pointer;
-width:100%;
+.add{
+background:#0d1b3e;
+color:white;
+margin-top:5px;
 }
-
-.add{background:#0d1b3e;color:white;margin-top:5px}
 
 /* CART */
 .cart{
@@ -66,7 +93,11 @@ padding:15px;
 overflow:auto;
 }
 
-.pay{background:#25D366;color:white;margin-top:10px}
+.pay{
+background:#25D366;
+color:white;
+margin-top:10px;
+}
 
 /* PAYMENT */
 .payment{
@@ -75,6 +106,7 @@ text-align:center;
 padding:20px;
 }
 
+/* FOOTER */
 footer{
 text-align:center;
 padding:20px;
@@ -88,33 +120,50 @@ color:white;
 <body>
 
 <header>
-<h1>RAJMANI SHOP 🛍️</h1>
+<h1>RAJMANI COMPLETE SHOP 🛍️</h1>
 </header>
+
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+
+<h2>Admin Login</h2>
+
+<input type="password" id="pass" placeholder="Enter Password">
+
+<button onclick="login()" style="background:#0d1b3e;color:white;">
+Login
+</button>
+
+</div>
+
+<!-- MAIN -->
+<div id="main">
 
 <!-- PRODUCTS -->
 <div class="products" id="products"></div>
 
 <!-- CART -->
 <div class="cart">
+
 <h2>Cart 🛒</h2>
 <div id="cartItems"></div>
+
 <h3 id="total"></h3>
 
 <button class="pay" onclick="openPayment()">
 Proceed to Payment
 </button>
+
 </div>
 
-<!-- PAYMENT PAGE -->
+<!-- PAYMENT -->
 <div class="payment" id="payment">
 
 <h2>Payment Page 💳</h2>
 
-<h3>Pay via UPI</h3>
-
 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=9687286173@upi&pn=RajmaniShop">
 
-<p>UPI ID: 9687286173@upi</p>
+<p><b>UPI ID:</b> 9687286173@upi</p>
 
 <button onclick="confirmPayment()" style="background:#25D366;color:white;margin-top:10px;">
 I Have Paid
@@ -122,18 +171,39 @@ I Have Paid
 
 </div>
 
-<footer>© 2026 Rajmani Shop</footer>
+</div>
+
+<footer>
+© 2026 Rajmani Shop | All Rights Reserved
+</footer>
 
 <script>
 
+/* ADMIN LOGIN */
+function login(){
+
+let pass=document.getElementById("pass").value;
+
+if(pass==="1234"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("main").style.display="block";
+load();
+updateCart();
+}
+else{
+alert("Wrong Password ❌");
+}
+
+}
+
 /* PRODUCTS */
-let products = [
-{name:"Premium Suiting", price:500, img:"shop1.jpeg"},
-{name:"Designer Shirting", price:700, img:"shop2.jpeg"},
-{name:"Wedding Fabric", price:1200, img:"shop3.jpeg"}
+let products=[
+{name:"Premium Suiting",price:500,img:"shop1.jpeg"},
+{name:"Designer Shirting",price:700,img:"shop2.jpeg"},
+{name:"Wedding Fabric",price:1200,img:"shop3.jpeg"}
 ];
 
-let cart = [];
+let cart=[];
 
 /* LOAD PRODUCTS */
 function load(){
@@ -144,6 +214,7 @@ products.forEach((p,i)=>{
 
 html+=`
 <div class="card">
+
 <img src="${p.img}">
 <h3>${p.name}</h3>
 <p>₹ ${p.price}</p>
@@ -157,15 +228,16 @@ Add to Cart
 });
 
 document.getElementById("products").innerHTML=html;
+
 }
 
-/* ADD TO CART */
+/* ADD CART */
 function add(i){
 cart.push(products[i]);
 updateCart();
 }
 
-/* UPDATE CART */
+/* CART */
 function updateCart(){
 
 let html="";
@@ -200,7 +272,6 @@ alert("Payment Successful 🎉");
 
 /* INIT */
 load();
-updateCart();
 
 </script>
 
