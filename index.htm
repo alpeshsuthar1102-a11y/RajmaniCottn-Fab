@@ -4,16 +4,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rajmani Online Shop</title>
+<title>Rajmani Shop Video Website</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:#f4f6f9;
+background:#f5f5f5;
 }
 
+/* HEADER */
 header{
 background:#0d1b3e;
 color:white;
@@ -21,42 +22,43 @@ text-align:center;
 padding:15px;
 }
 
-h1{color:#d4af37;margin:0}
-
-/* NAV */
-nav{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-padding:10px;
-background:white;
+h1{
+color:#d4af37;
+margin:0;
 }
 
-nav button{
-padding:10px;
-border:none;
-border-radius:20px;
-background:#0d1b3e;
-color:white;
-cursor:pointer;
+/* SLIDER */
+.slider{
+width:100%;
+height:300px;
+overflow:hidden;
 }
 
-/* SECTIONS */
-section{display:none;padding:15px}
-.active{display:block}
+.slider img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+/* VIDEO */
+video{
+width:100%;
+height:300px;
+object-fit:cover;
+}
 
 /* PRODUCTS */
-.grid{
+.products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
+padding:15px;
 }
 
 .card{
 background:white;
 border-radius:15px;
-padding:10px;
+overflow:hidden;
 box-shadow:0 5px 10px rgba(0,0,0,0.1);
 }
 
@@ -64,37 +66,25 @@ box-shadow:0 5px 10px rgba(0,0,0,0.1);
 width:100%;
 height:150px;
 object-fit:cover;
-border-radius:10px;
 }
 
-.price{color:green;font-weight:bold}
+.card h3{
+margin:10px;
+}
 
-button.action{
+.card p{
+margin:0 10px;
+color:green;
+font-weight:bold;
+}
+
+button{
 width:100%;
 padding:10px;
 border:none;
 background:#0d1b3e;
 color:white;
-border-radius:10px;
 cursor:pointer;
-margin-top:5px;
-}
-
-/* INPUT */
-input,textarea{
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-/* REVIEW */
-.review{
-background:white;
-padding:10px;
-margin:10px 0;
-border-radius:10px;
 }
 
 /* FOOTER */
@@ -103,6 +93,7 @@ text-align:center;
 padding:15px;
 background:#071126;
 color:white;
+margin-top:20px;
 }
 
 </style>
@@ -112,181 +103,90 @@ color:white;
 
 <header>
 <h1>RAJMANI SHOP 🛍️</h1>
+<p>Video + Slider + Shop Website</p>
 </header>
 
-<!-- NAV -->
-<nav>
-<button onclick="show('shop')">Shop</button>
-<button onclick="show('cart')">Cart</button>
-<button onclick="show('admin')">Admin</button>
-<button onclick="show('review')">Review</button>
-</nav>
+<!-- IMAGE SLIDER -->
+<div class="slider">
+<img id="slide" src="shop1.jpeg">
+</div>
 
-<!-- SHOP -->
-<section id="shop" class="active">
-<h2>Products</h2>
-<div class="grid" id="products"></div>
-</section>
+<!-- VIDEO -->
+<video autoplay muted loop>
+<source src="shop-video.mp4" type="video/mp4">
+</video>
 
-<!-- CART -->
-<section id="cart">
-<h2>Cart 🛒</h2>
-<div id="cartList"></div>
-<h3 id="total"></h3>
+<!-- PRODUCTS -->
+<h2 style="text-align:center;">Products</h2>
 
-<button class="action" onclick="checkout()">
-Checkout (WhatsApp)
-</button>
-</section>
+<div class="products">
 
-<!-- ADMIN -->
-<section id="admin">
-<h2>Admin Panel 🔐</h2>
+<div class="card">
+<img src="shop1.jpeg">
+<h3>Premium Suiting</h3>
+<p>₹500</p>
+<button onclick="order('Premium Suiting',500)">Order Now</button>
+</div>
 
-<input id="name" placeholder="Product Name">
-<input id="price" type="number" placeholder="Price">
-<input id="img" placeholder="Image URL (shop1.jpeg)">
+<div class="card">
+<img src="shop2.jpeg">
+<h3>Designer Shirting</h3>
+<p>₹700</p>
+<button onclick="order('Designer Shirting',700)">Order Now</button>
+</div>
 
-<button class="action" onclick="addProduct()">Add Product</button>
-</section>
+<div class="card">
+<img src="shop3.jpeg">
+<h3>Wedding Fabric</h3>
+<p>₹1200</p>
+<button onclick="order('Wedding Fabric',1200)">Order Now</button>
+</div>
 
-<!-- REVIEW -->
-<section id="review">
-<h2>Customer Reviews ⭐</h2>
+<div class="card">
+<img src="shop4.jpeg">
+<h3>Cotton Fabric</h3>
+<p>₹400</p>
+<button onclick="order('Cotton Fabric',400)">Order Now</button>
+</div>
 
-<input id="rname" placeholder="Your Name">
-<textarea id="rmsg" placeholder="Your Review"></textarea>
-
-<button class="action" onclick="addReview()">Submit Review</button>
-
-<div id="reviews"></div>
-</section>
+</div>
 
 <footer>
-© 2026 Rajmani Shop
+© 2026 Rajmani Shop | All Rights Reserved
 </footer>
 
 <script>
 
-/* DATA */
-let products = JSON.parse(localStorage.getItem("products")) || [
-{name:"Premium Suiting",price:500,img:"shop1.jpeg"},
-{name:"Designer Shirting",price:700,img:"shop2.jpeg"}
+/* IMAGE SLIDER */
+let images = [
+"shop1.jpeg",
+"shop2.jpeg",
+"shop3.jpeg",
+"shop4.jpeg",
+"shop5.jpeg"
 ];
 
-let cart=[];
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+let i = 0;
 
-/* NAV */
-function show(id){
-document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-render();
-}
+setInterval(()=>{
+i = (i + 1) % images.length;
+document.getElementById("slide").src = images[i];
+},2000);
 
-/* RENDER */
-function render(){
+/* WHATSAPP ORDER */
+function order(name,price){
 
-/* PRODUCTS */
-let phtml="";
-products.forEach((p,i)=>{
-phtml+=`
-<div class="card">
-<img src="${p.img}">
-<h3>${p.name}</h3>
-<p class="price">₹${p.price}</p>
-<button class="action" onclick="add(${i})">Add to Cart</button>
-</div>
-`;
-});
-document.getElementById("products").innerHTML=phtml;
+let msg =
+"Hello Rajmani Shop%0A" +
+"I want to order:%0A" +
+"- " + name + " (₹" + price + ")";
 
-/* CART */
-let chtml="";
-let total=0;
-
-cart.forEach((c,i)=>{
-total+=c.price;
-chtml+=`<p>${c.name} - ₹${c.price}</p>`;
-});
-
-document.getElementById("cartList").innerHTML=chtml;
-document.getElementById("total").innerText="Total: ₹"+total;
-
-/* REVIEWS */
-let rhtml="";
-reviews.forEach(r=>{
-rhtml+=`
-<div class="review">
-<b>${r.name}</b>
-<p>${r.msg}</p>
-</div>
-`;
-});
-document.getElementById("reviews").innerHTML=rhtml;
+window.open(
+"https://wa.me/919687286173?text=" + encodeURIComponent(msg),
+"_blank"
+);
 
 }
-
-/* ADD PRODUCT */
-function addProduct(){
-
-let n=document.getElementById("name").value;
-let p=document.getElementById("price").value;
-let i=document.getElementById("img").value;
-
-if(!n||!p||!i){alert("Fill all");return;}
-
-products.push({name:n,price:parseInt(p),img:i});
-localStorage.setItem("products",JSON.stringify(products));
-
-alert("Product Added ✅");
-render();
-}
-
-/* ADD CART */
-function add(i){
-cart.push(products[i]);
-render();
-}
-
-/* CHECKOUT */
-function checkout(){
-
-let msg="Order:%0A";
-let total=0;
-
-cart.forEach(c=>{
-msg+=`- ${c.name} ₹${c.price}%0A`;
-total+=c.price;
-});
-
-msg+=`Total: ₹${total}`;
-
-window.open("https://wa.me/919687286173?text="+encodeURIComponent(msg));
-
-cart=[];
-render();
-}
-
-/* REVIEW */
-function addReview(){
-
-let n=document.getElementById("rname").value;
-let m=document.getElementById("rmsg").value;
-
-if(!n||!m){alert("Fill all");return;}
-
-reviews.push({name:n,msg:m});
-localStorage.setItem("reviews",JSON.stringify(reviews));
-
-document.getElementById("rname").value="";
-document.getElementById("rmsg").value="";
-
-render();
-}
-
-/* INIT */
-render();
 
 </script>
 
