@@ -4,241 +4,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rajmani Suiting Shirting</title>
+<title>Rajmani Shop - Complete E-Commerce</title>
 
 <style>
 
-html{scroll-behavior:smooth;}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f5f5f5;
-color:#333;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f5f5}
 
 /* HEADER */
 header{
 background:#0d1b3e;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.logo-area{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.logo-area img{
-height:80px;
-width:80px;
-border-radius:50%;
-object-fit:cover;
-background:white;
-padding:5px;
-}
-
-.logo{
-font-size:28px;
-font-weight:bold;
-color:#d4af37;
-}
-
-nav a{
 color:white;
-text-decoration:none;
-margin-left:20px;
-font-weight:bold;
-}
-
-nav a:hover{color:#d4af37;}
-
-/* HERO */
-.hero{
-background:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-url('./shop1.jpeg');
-background-size:cover;
-background-position:center;
-height:90vh;
-display:flex;
-justify-content:center;
-align-items:center;
+padding:15px;
 text-align:center;
-color:white;
-padding:20px;
 }
 
-.hero h1{font-size:55px;}
-.hero p{font-size:22px;margin:15px 0;}
+h1{color:#d4af37}
 
-/* BUTTONS */
-.btn{
-display:inline-block;
-padding:12px 25px;
-margin:8px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.call-btn{background:#d4af37;color:black;}
-.whatsapp-btn{background:#25D366;color:white;}
-.meesho-btn{background:#f43397;color:white;}
-.instagram-btn{background:#E1306C;color:white;}
-
-/* SECTIONS */
-section{padding:80px 8%;}
-
-.section-title{
-text-align:center;
-font-size:38px;
-color:#0d1b3e;
-margin-bottom:40px;
-}
-
-/* FEATURES */
-.features{
+/* PRODUCTS */
+.products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.feature-box{
-background:white;
-padding:25px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
-}
-
-.gallery img{
-width:100%;
-height:300px;
-object-fit:cover;
-border-radius:15px;
-}
-
-/* CONTACT */
-.contact{
-background:#0d1b3e;
-color:white;
-border-radius:20px;
-text-align:center;
-}
-
-.map-btn{
-display:inline-block;
-margin-top:15px;
-background:#d4af37;
-color:black;
-padding:12px 25px;
-border-radius:50px;
-text-decoration:none;
-}
-
-/* FLOAT WHATSAPP */
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:14px 18px;
-border-radius:50px;
-text-decoration:none;
-}
-
-/* REVIEW */
-.review-box{
-max-width:600px;
-margin:auto;
-text-align:center;
-}
-
-.review-box input,
-.review-box textarea{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-.review-list{
-max-width:800px;
-margin:40px auto;
-display:grid;
-gap:15px;
-}
-
-.review-card{
-background:white;
 padding:20px;
+}
+
+.card{
+background:white;
+padding:15px;
 border-radius:15px;
-position:relative;
 box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
-.delete-btn{
-position:absolute;
-top:10px;
-right:10px;
-background:red;
-color:white;
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+padding:10px;
 border:none;
-padding:5px 10px;
-border-radius:5px;
+border-radius:50px;
 cursor:pointer;
+width:100%;
 }
 
-/* POPUP */
-#popup{
+.add{background:#0d1b3e;color:white;margin-top:5px}
+
+/* CART */
+.cart{
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.6);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.popup-box{
+right:0;
+top:0;
+width:320px;
+height:100%;
 background:white;
-padding:25px;
-border-radius:15px;
-text-align:center;
-width:90%;
-max-width:320px;
+box-shadow:-5px 0 15px rgba(0,0,0,.2);
+padding:15px;
+overflow:auto;
 }
 
-/* FOOTER */
-footer{
-background:#071126;
-color:white;
+.pay{background:#25D366;color:white;margin-top:10px}
+
+/* PAYMENT */
+.payment{
+display:none;
 text-align:center;
 padding:20px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#071126;
+color:white;
 }
 
 </style>
@@ -247,196 +88,119 @@ padding:20px;
 <body>
 
 <header>
-<div class="logo-area">
-<img src="./logo.png">
-<div class="logo">RAJMANI SUITING SHIRTING</div>
-</div>
-
-<nav>
-<a href="#about">About</a>
-<a href="#collection">Collection</a>
-<a href="#gallery">Gallery</a>
-<a href="#reviews">Reviews</a>
-<a href="#contact">Contact</a>
-</nav>
+<h1>RAJMANI SHOP 🛍️</h1>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-<div>
-<h1>Premium Suiting & Shirting</h1>
-<p>Quality Fabrics • Trusted Shop • Best Price</p>
+<!-- PRODUCTS -->
+<div class="products" id="products"></div>
 
-<a class="btn call-btn" href="tel:+919687286173">📞 Call</a>
-<a class="btn whatsapp-btn" href="https://wa.me/919687286173">💬 WhatsApp</a>
-<a class="btn meesho-btn" href="https://www.meesho.com">🛒 Meesho</a>
-<a class="btn instagram-btn" href="https://instagram.com">📸 Instagram</a>
+<!-- CART -->
+<div class="cart">
+<h2>Cart 🛒</h2>
+<div id="cartItems"></div>
+<h3 id="total"></h3>
+
+<button class="pay" onclick="openPayment()">
+Proceed to Payment
+</button>
 </div>
-</section>
 
-<!-- COLLECTION -->
-<section id="collection">
-<h2 class="section-title">Our Collection</h2>
+<!-- PAYMENT PAGE -->
+<div class="payment" id="payment">
 
-<div class="features">
-<div class="feature-box">Premium Suiting</div>
-<div class="feature-box">Designer Shirting</div>
-<div class="feature-box">Wedding Collection</div>
-<div class="feature-box">Latest Designs</div>
-</div>
-</section>
+<h2>Payment Page 💳</h2>
 
-<!-- GALLERY -->
-<section id="gallery">
-<h2 class="section-title">Gallery</h2>
+<h3>Pay via UPI</h3>
 
-<div class="gallery">
-<img src="./shop1.jpeg">
-<img src="./shop2.jpeg">
-<img src="./shop3.jpeg">
-<img src="./shop4.jpeg">
-<img src="./shop5.jpeg">
-<img src="./shop6.jpeg">
-<img src="./shop7.jpeg">
-</div>
-</section>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=9687286173@upi&pn=RajmaniShop">
 
-<!-- REVIEWS -->
-<section id="reviews">
+<p>UPI ID: 9687286173@upi</p>
 
-<h2 class="section-title">Customer Reviews</h2>
-
-<div class="review-box">
-
-<input type="text" id="name" placeholder="Your Name">
-
-<textarea id="message" placeholder="Write review..."></textarea>
-
-<button onclick="addReview()"
-style="padding:12px 25px;background:#0d1b3e;color:white;border:none;border-radius:50px;">
-Submit Review
+<button onclick="confirmPayment()" style="background:#25D366;color:white;margin-top:10px;">
+I Have Paid
 </button>
 
 </div>
 
-<div id="reviewList" class="review-list"></div>
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact">
-
-<h2 class="section-title" style="color:white;">Contact Us</h2>
-
-<p>📍 Deesa, Gujarat</p>
-<p>📞 96872 86173</p>
-<p>📞 88498 83598</p>
-
-<a class="map-btn" href="https://maps.app.goo.gl/" target="_blank">
-📍 View Location
-</a>
-
-</section>
-
-<!-- FLOAT WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/919687286173">WhatsApp</a>
-
-<!-- POPUP -->
-<div id="popup">
-<div class="popup-box">
-
-<h2>Join WhatsApp Group</h2>
-<p>Latest Offers & Fabrics Updates</p>
-
-<a href="https://wa.me/919687286173?text=I%20want%20to%20join%20your%20WhatsApp%20group"
-style="display:inline-block;background:#25D366;color:white;padding:12px 20px;border-radius:50px;margin-top:10px;text-decoration:none;">
-👥 Join Now
-</a>
-
-<br><br>
-
-<button onclick="closePopup()"
-style="background:red;color:white;border:none;padding:10px 15px;border-radius:50px;">
-Close
-</button>
-
-</div>
-</div>
-
-<footer>
-© 2026 Rajmani Suiting Shirting
-</footer>
+<footer>© 2026 Rajmani Shop</footer>
 
 <script>
 
-window.onload = function(){
-setTimeout(()=>{
-document.getElementById("popup").style.display="flex";
-loadReviews();
-},2000);
-};
+/* PRODUCTS */
+let products = [
+{name:"Premium Suiting", price:500, img:"shop1.jpeg"},
+{name:"Designer Shirting", price:700, img:"shop2.jpeg"},
+{name:"Wedding Fabric", price:1200, img:"shop3.jpeg"}
+];
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
+let cart = [];
 
-function addReview(){
-
-let name=document.getElementById("name").value;
-let message=document.getElementById("message").value;
-
-if(name==""||message==""){
-alert("Fill all fields");
-return;
-}
-
-let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
-
-reviews.push({
-id:Date.now(),
-name:name,
-message:message
-});
-
-localStorage.setItem("reviews",JSON.stringify(reviews));
-
-document.getElementById("name").value="";
-document.getElementById("message").value="";
-
-loadReviews();
-}
-
-function deleteReview(id){
-
-let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
-
-reviews=reviews.filter(r=>r.id!==id);
-
-localStorage.setItem("reviews",JSON.stringify(reviews));
-
-loadReviews();
-}
-
-function loadReviews(){
-
-let reviews=JSON.parse(localStorage.getItem("reviews"))||[];
+/* LOAD PRODUCTS */
+function load(){
 
 let html="";
 
-reviews.reverse().forEach(r=>{
+products.forEach((p,i)=>{
 
 html+=`
-<div class="review-card">
-<button class="delete-btn" onclick="deleteReview(${r.id})">X</button>
-<h3>${r.name}</h3>
-<p>${r.message}</p>
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p>₹ ${p.price}</p>
+
+<button class="add" onclick="add(${i})">
+Add to Cart
+</button>
+
 </div>
 `;
-
 });
 
-document.getElementById("reviewList").innerHTML=html;
+document.getElementById("products").innerHTML=html;
 }
+
+/* ADD TO CART */
+function add(i){
+cart.push(products[i]);
+updateCart();
+}
+
+/* UPDATE CART */
+function updateCart(){
+
+let html="";
+let total=0;
+
+cart.forEach(c=>{
+total+=c.price;
+html+=`<p>${c.name} - ₹${c.price}</p>`;
+});
+
+document.getElementById("cartItems").innerHTML=html;
+document.getElementById("total").innerText="Total: ₹"+total;
+}
+
+/* PAYMENT */
+function openPayment(){
+document.getElementById("payment").style.display="block";
+}
+
+function confirmPayment(){
+
+let msg="Order Paid:%0A";
+
+cart.forEach(c=>{
+msg+=`- ${c.name} ₹${c.price}%0A`;
+});
+
+window.open("https://wa.me/919687286173?text="+encodeURIComponent(msg));
+
+alert("Payment Successful 🎉");
+}
+
+/* INIT */
+load();
+updateCart();
 
 </script>
 
