@@ -8,38 +8,45 @@
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial;
     background:#f5f5f5;
 }
 
+/* HEADER */
 header{
     background:#111;
-    color:white;
-    padding:20px;
+    color:#fff;
+    padding:15px;
     text-align:center;
 }
 
-.hero{
-    padding:40px;
+/* SEARCH */
+.search{
     text-align:center;
+    padding:10px;
+}
+.search input{
+    padding:10px;
+    width:80%;
+    max-width:400px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:30px;
     background:white;
 }
 
-.hero h1{
-    margin:0;
-    font-size:32px;
-}
-
-.hero p{
-    color:gray;
-}
-
+/* PRODUCTS */
 .products{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    padding:20px;
     gap:15px;
+    padding:20px;
 }
 
 .card{
@@ -48,7 +55,6 @@ header{
     border-radius:10px;
     padding:10px;
     box-shadow:0 0 10px rgba(0,0,0,0.1);
-    text-align:center;
 }
 
 .card img{
@@ -56,25 +62,36 @@ header{
     border-radius:10px;
 }
 
-.btn{
-    display:inline-block;
-    margin-top:10px;
+button{
+    padding:8px;
+    margin-top:5px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.order{
     background:#25D366;
     color:white;
+}
+
+/* CART */
+.cart{
+    background:white;
     padding:10px;
-    border-radius:6px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-footer{
+    margin:10px;
     text-align:center;
-    padding:20px;
-    background:#111;
-    color:white;
 }
 
-/* Floating WhatsApp Button */
+/* REVIEW */
+.review-box{
+    background:white;
+    margin:10px;
+    padding:10px;
+    text-align:center;
+}
+
+/* FLOAT BUTTON */
 .float{
     position:fixed;
     bottom:20px;
@@ -84,8 +101,27 @@ footer{
     padding:15px;
     border-radius:50px;
     text-decoration:none;
-    font-size:18px;
-    box-shadow:0 5px 10px rgba(0,0,0,0.3);
+}
+
+/* GALLERY */
+.gallery{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:10px;
+}
+.gallery img{
+    width:150px;
+    border-radius:10px;
+}
+
+/* FOOTER */
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:15px;
 }
 </style>
 
@@ -94,48 +130,117 @@ footer{
 <body>
 
 <header>
-    <h2>Rajmani Suiting Shirting</h2>
-    <p>Best Fabric Shop in Deesa</p>
+<h2>Rajmani Suiting Shirting</h2>
+<p>Best Fabric Shop</p>
 </header>
 
-<section class="hero">
-    <h1>Premium Suiting & Shirting Collection</h1>
-    <p>Order directly on WhatsApp</p>
-</section>
+<div class="search">
+<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+</div>
 
-<section class="products">
+<div class="hero">
+<h2>Premium Collection</h2>
+<p>Order directly on WhatsApp</p>
+</div>
 
-    <div class="card">
-        <img src="shop1.jpeg">
-        <h3>Shirting</h3>
-        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Shirting%20ka%20order%20karna%20hai" target="_blank">Order</a>
-    </div>
+<!-- CART -->
+<div class="cart">
+<h3>🛒 Cart Items: <span id="cartCount">0</span></h3>
+</div>
 
-    <div class="card">
-        <img src="shop2.jpeg">
-        <h3>Suiting</h3>
-        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Suiting%20ka%20order%20karna%20hai" target="_blank">Order</a>
-    </div>
+<!-- PRODUCTS -->
+<div class="products" id="productList">
 
-    <div class="card">
-        <img src="shop3.jpeg">
-        <h3>Premium Cloth</h3>
-        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Premium%20cloth%20chahiye" target="_blank">Order</a>
-    </div>
+<div class="card">
+<img src="shop1.jpeg">
+<h3>Shirting</h3>
+<button class="order" onclick="order('Shirting')">Order WhatsApp</button>
+<button onclick="addCart('Shirting')">Add to Cart</button>
+</div>
 
-</section>
+<div class="card">
+<img src="shop2.jpeg">
+<h3>Suiting</h3>
+<button class="order" onclick="order('Suiting')">Order WhatsApp</button>
+<button onclick="addCart('Suiting')">Add to Cart</button>
+</div>
 
+<div class="card">
+<img src="shop3.jpeg">
+<h3>Premium Cloth</h3>
+<button class="order" onclick="order('Premium Cloth')">Order WhatsApp</button>
+<button onclick="addCart('Premium Cloth')">Add to Cart</button>
+</div>
+
+</div>
+
+<!-- GALLERY -->
+<h3 style="text-align:center;">Gallery</h3>
+<div class="gallery">
+<img src="shop1.jpeg">
+<img src="shop2.jpeg">
+<img src="shop3.jpeg">
+</div>
+
+<!-- REVIEW -->
+<div class="review-box">
+<h3>Customer Review</h3>
+
+<input id="name" placeholder="Your Name"><br><br>
+<textarea id="msg" placeholder="Write review"></textarea><br><br>
+<button onclick="addReview()">Submit Review</button>
+
+<div id="reviews"></div>
+</div>
+
+<!-- CONTACT -->
 <footer>
-    <p>📍 Aroma Shopping Center, Deesa</p>
-    <p>📞 9687286173 | 8849883598</p>
+<p>📍 Aroma Shopping Center, Deesa</p>
+<p>📞 9687286173 | 8849883598</p>
 </footer>
 
-<!-- Floating WhatsApp Button -->
-<a class="float" 
-href="https://wa.me/919687286173?text=Hello%20mujhe%20order%20karna%20hai" 
+<!-- FLOAT WHATSAPP -->
+<a class="float"
+href="https://wa.me/919687286173?text=Hello%20mujhe%20order%20karna%20hai"
 target="_blank">
 💬 Order
 </a>
+
+<script>
+let cart = 0;
+
+function addCart(item){
+    cart++;
+    document.getElementById("cartCount").innerText = cart;
+    alert(item + " added to cart");
+}
+
+function order(item){
+    let url = "https://wa.me/919687286173?text=Mujhe " + item + " order karna hai";
+    window.open(url, "_blank");
+}
+
+function searchProduct(){
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for(let i=0;i<cards.length;i++){
+        let title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+        cards[i].style.display = title.includes(input) ? "block" : "none";
+    }
+}
+
+function addReview(){
+    let name = document.getElementById("name").value;
+    let msg = document.getElementById("msg").value;
+
+    if(name && msg){
+        let div = document.createElement("div");
+        div.innerHTML = "<b>" + name + "</b>: " + msg;
+        document.getElementById("reviews").appendChild(div);
+    }
+}
+</script>
 
 </body>
 </html>
