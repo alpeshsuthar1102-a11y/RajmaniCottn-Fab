@@ -1,194 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rajmani Shop Video Website</title>
+<title>Rajmani Suiting Shirting</title>
 
 <style>
-
 body{
-margin:0;
-font-family:Arial;
-background:#f5f5f5;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f5f5;
 }
 
-/* HEADER */
 header{
-background:#0d1b3e;
-color:white;
-text-align:center;
-padding:15px;
+    background:#111;
+    color:white;
+    padding:20px;
+    text-align:center;
 }
 
-h1{
-color:#d4af37;
-margin:0;
+.hero{
+    padding:40px;
+    text-align:center;
+    background:white;
 }
 
-/* SLIDER */
-.slider{
-width:100%;
-height:300px;
-overflow:hidden;
+.hero h1{
+    margin:0;
+    font-size:32px;
 }
 
-.slider img{
-width:100%;
-height:300px;
-object-fit:cover;
+.hero p{
+    color:gray;
 }
 
-/* VIDEO */
-video{
-width:100%;
-height:300px;
-object-fit:cover;
-}
-
-/* PRODUCTS */
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-padding:15px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:20px;
+    gap:15px;
 }
 
 .card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
+    background:white;
+    width:200px;
+    border-radius:10px;
+    padding:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    text-align:center;
 }
 
 .card img{
-width:100%;
-height:150px;
-object-fit:cover;
+    width:100%;
+    border-radius:10px;
 }
 
-.card h3{
-margin:10px;
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    background:#25D366;
+    color:white;
+    padding:10px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-.card p{
-margin:0 10px;
-color:green;
-font-weight:bold;
-}
-
-button{
-width:100%;
-padding:10px;
-border:none;
-background:#0d1b3e;
-color:white;
-cursor:pointer;
-}
-
-/* FOOTER */
 footer{
-text-align:center;
-padding:15px;
-background:#071126;
-color:white;
-margin-top:20px;
+    text-align:center;
+    padding:20px;
+    background:#111;
+    color:white;
 }
 
+/* Floating WhatsApp Button */
+.float{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px;
+    border-radius:50px;
+    text-decoration:none;
+    font-size:18px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.3);
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>RAJMANI SHOP 🛍️</h1>
-<p>Video + Slider + Shop Website</p>
+    <h2>Rajmani Suiting Shirting</h2>
+    <p>Best Fabric Shop in Deesa</p>
 </header>
 
-<!-- IMAGE SLIDER -->
-<div class="slider">
-<img id="slide" src="shop1.jpeg">
-</div>
+<section class="hero">
+    <h1>Premium Suiting & Shirting Collection</h1>
+    <p>Order directly on WhatsApp</p>
+</section>
 
-<!-- VIDEO -->
-<video autoplay muted loop>
-<source src="shop-video.mp4" type="video/mp4">
-</video>
+<section class="products">
 
-<!-- PRODUCTS -->
-<h2 style="text-align:center;">Products</h2>
+    <div class="card">
+        <img src="shop1.jpeg">
+        <h3>Shirting</h3>
+        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Shirting%20ka%20order%20karna%20hai" target="_blank">Order</a>
+    </div>
 
-<div class="products">
+    <div class="card">
+        <img src="shop2.jpeg">
+        <h3>Suiting</h3>
+        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Suiting%20ka%20order%20karna%20hai" target="_blank">Order</a>
+    </div>
 
-<div class="card">
-<img src="shop1.jpeg">
-<h3>Premium Suiting</h3>
-<p>₹500</p>
-<button onclick="order('Premium Suiting',500)">Order Now</button>
-</div>
+    <div class="card">
+        <img src="shop3.jpeg">
+        <h3>Premium Cloth</h3>
+        <a class="btn" href="https://wa.me/919687286173?text=Mujhe%20Premium%20cloth%20chahiye" target="_blank">Order</a>
+    </div>
 
-<div class="card">
-<img src="shop2.jpeg">
-<h3>Designer Shirting</h3>
-<p>₹700</p>
-<button onclick="order('Designer Shirting',700)">Order Now</button>
-</div>
-
-<div class="card">
-<img src="shop3.jpeg">
-<h3>Wedding Fabric</h3>
-<p>₹1200</p>
-<button onclick="order('Wedding Fabric',1200)">Order Now</button>
-</div>
-
-<div class="card">
-<img src="shop4.jpeg">
-<h3>Cotton Fabric</h3>
-<p>₹400</p>
-<button onclick="order('Cotton Fabric',400)">Order Now</button>
-</div>
-
-</div>
+</section>
 
 <footer>
-© 2026 Rajmani Shop | All Rights Reserved
+    <p>📍 Aroma Shopping Center, Deesa</p>
+    <p>📞 9687286173 | 8849883598</p>
 </footer>
 
-<script>
-
-/* IMAGE SLIDER */
-let images = [
-"shop1.jpeg",
-"shop2.jpeg",
-"shop3.jpeg",
-"shop4.jpeg",
-"shop5.jpeg"
-];
-
-let i = 0;
-
-setInterval(()=>{
-i = (i + 1) % images.length;
-document.getElementById("slide").src = images[i];
-},2000);
-
-/* WHATSAPP ORDER */
-function order(name,price){
-
-let msg =
-"Hello Rajmani Shop%0A" +
-"I want to order:%0A" +
-"- " + name + " (₹" + price + ")";
-
-window.open(
-"https://wa.me/919687286173?text=" + encodeURIComponent(msg),
-"_blank"
-);
-
-}
-
-</script>
+<!-- Floating WhatsApp Button -->
+<a class="float" 
+href="https://wa.me/919687286173?text=Hello%20mujhe%20order%20karna%20hai" 
+target="_blank">
+💬 Order
+</a>
 
 </body>
 </html>
